@@ -75,6 +75,24 @@ class BalanceSheetTest < ActiveSupport::TestCase
     assert_equal 3000 + 5000, liability_groups.find { |ag| ag.name == "Other Liabilities" }.total
   end
 
+  test "ignores business accounts when calculating net worth" do
+    create_account(balance: 2000, accountable: Depository.new)
+    create_account(balance: 1000, accountable: CreditCard.new)
+    create_account(balance: 2500, accountable: Depository.new, business: true)
+    create_account(balance: 300, accountable: CreditCard.new, business: true)
+
+    assert_equal 2000 - 1000, BalanceSheet.new(@family).net_worth
+  end
+
+  test "calculates business balance sheet net worth" do
+    create_account(balance: 2000, accountable: Depository.new)
+    create_account(balance: 1000, accountable: CreditCard.new)
+    create_account(balance: 2500, accountable: Depository.new, business: true)
+    create_account(balance: 300, accountable: CreditCard.new, business: true)
+
+    assert_equal 2500 - 300, @family.business_balance_sheet.net_worth
+  end
+
   private
     def create_account(attributes = {})
       account = @family.accounts.create! name: "Test", currency: "USD", **attributes
