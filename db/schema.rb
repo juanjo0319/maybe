@@ -35,6 +35,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_18_120146) do
     t.decimal "cash_balance", precision: 19, scale: 4, default: "0.0"
     t.jsonb "locked_attributes", default: {}
     t.string "status", default: "active"
+    t.boolean "business", default: false, null: false
     t.index ["accountable_id", "accountable_type"], name: "index_accounts_on_accountable_id_and_accountable_type"
     t.index ["accountable_type"], name: "index_accounts_on_accountable_type"
     t.index ["currency"], name: "index_accounts_on_currency"
@@ -45,6 +46,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_18_120146) do
     t.index ["import_id"], name: "index_accounts_on_import_id"
     t.index ["plaid_account_id"], name: "index_accounts_on_plaid_account_id"
     t.index ["status"], name: "index_accounts_on_status"
+    t.index ["business"], name: "index_accounts_on_business"
   end
 
   create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
