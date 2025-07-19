@@ -23,6 +23,8 @@ class Account < ApplicationRecord
   scope :liabilities, -> { where(classification: "liability") }
   scope :alphabetically, -> { order(:name) }
   scope :manual, -> { where(plaid_account_id: nil) }
+  scope :personal, -> { where(business: [false, nil]) }
+  scope :business, -> { where(business: true) }
 
   has_one_attached :logo
 
