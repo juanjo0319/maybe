@@ -86,6 +86,16 @@ If you'd like multi-currency support, there are a few extra steps to follow.
    product and the free plan is sufficient for basic multi-currency support.
 2. Add your API key to your `.env` file.
 
+### Business balance sheet
+
+To view only accounts flagged as business-related, use:
+
+```ruby
+family.business_balance_sheet
+```
+
+This returns a `BalanceSheet` scoped to business accounts.
+
 ### Setup Guides
 
 - [Mac dev setup guide](https://github.com/maybe-finance/maybe/wiki/Mac-Dev-Setup-Guide)

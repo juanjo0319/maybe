@@ -5,8 +5,9 @@ class BalanceSheet
 
   attr_reader :family
 
-  def initialize(family)
+  def initialize(family, business: false)
     @family = family
+    @business = business
   end
 
   def assets
@@ -55,7 +56,11 @@ class BalanceSheet
     end
 
     def account_totals
-      @account_totals ||= AccountTotals.new(family, sync_status_monitor: sync_status_monitor)
+      @account_totals ||= AccountTotals.new(
+        family,
+        business: @business,
+        sync_status_monitor: sync_status_monitor
+      )
     end
 
     def net_worth_series_builder
