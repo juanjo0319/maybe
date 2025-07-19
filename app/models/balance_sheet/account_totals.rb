@@ -1,6 +1,7 @@
 class BalanceSheet::AccountTotals
-  def initialize(family, sync_status_monitor:)
+  def initialize(family, business: false, sync_status_monitor:)
     @family = family
+    @business = business
     @sync_status_monitor = sync_status_monitor
   end
 

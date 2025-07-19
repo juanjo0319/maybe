@@ -60,6 +60,10 @@ class Family < ApplicationRecord
     @balance_sheet ||= BalanceSheet.new(self)
   end
 
+  def business_balance_sheet
+    @business_balance_sheet ||= BalanceSheet.new(self, business: true)
+  end
+
   def income_statement
     @income_statement ||= IncomeStatement.new(self)
   end
